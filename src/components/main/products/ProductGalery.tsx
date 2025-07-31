@@ -33,7 +33,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ products, cart, onSelec
                   key={product.id}
                   onClick={() => onClick(product)}
                   className={`
-                  flex flex-col items-center border rounded-lg p-4 shadow cursor-pointer w-40
+                  flex flex-col justify-between border rounded-lg p-4 shadow cursor-pointer w-40
                   ${isSelected ? 'border-blue-600 ring-2 ring-blue-400' : 'border-gray-300'}
                    `}
                 >

@@ -17,7 +17,7 @@ const CartGallery: React.FC<ChartGalleryProps> = ({ products, cart, onQuantityCh
 
     return (
         <div className="w-full aspect-[16/9] overflow-y-auto p-4 bg-gray-50">
-          <div className="flex flex-wrap justify-start gap-4">
+          <div className="flex flex-wrap justify-start gap-4 items-stretch">
             {cartProducts.map((p) =>  {
               var quantity = cart.get(p.id);
               if (!quantity) quantity = 0;

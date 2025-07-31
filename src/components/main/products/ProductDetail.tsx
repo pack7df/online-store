@@ -9,18 +9,10 @@ type ProductDetailsProps = {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product, quantity, onQuantityChange })  => {
       return (
-        <section className="max-w-xl mx-auto p-6 bg-white rounded shadow">
-          <h2 className="text-3xl font-bold mb-4 text-center">{product.title}</h2>
-          <p className="italic text-gray-500">Category: {product.category}</p>
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full max-h-64 object-contain mb-4"
-          />
+        <section className="flex flex-col gap-5 max-w-xl mx-auto p-6 bg-white rounded shadow h-full">
           <p className="text-xl text-green-600 font-semibold mb-2">
             Price: ${product.price.toFixed(2)}
           </p>
-          <p className="mb-4 text-gray-700">{product.description}</p>
           <div className="flex items-center gap-2">
                 <ShoppingCartIcon className="shopingCart" />
                 <button
@@ -46,7 +38,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, quantity, onQu
                 <p className="text-xl text-green-600 font-semibold mb-2">
                     ${(product.price*quantity).toFixed(2)}
                 </p>
-            </div> 
+          </div>
+          <p className="italic text-gray-500">Category: {product.category}</p>
+          <h2 className="text-3xl font-bold mb-4 text-center">{product.title}</h2>
+          <p className="mb-4 text-gray-700">{product.description}</p>
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-full max-h-64 object-contain mb-4"
+          />
+          
+           
         </section>
       );
 }
