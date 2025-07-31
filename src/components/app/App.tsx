@@ -3,45 +3,7 @@ import './App.css'
 import MainView from '../main/MainView';
 import CartView from '../cart/CartView';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
-import type { Product } from '../../models/Product';
-
-
-const fakeProducts: Product[] = [
-  { id: 1, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 2, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 3, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 4, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 5, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 6, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 7, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 8, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 9, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 10, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 11, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 12, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 13, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 14, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 15, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 16, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 17, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 18, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 19, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 20, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 21, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 22, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 23, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 24, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 25, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 26, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 27, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 28, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 29, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 30, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-  { id: 31, title: 'Gamepad Pro', price: 59.99, image: 'https://picsum.photos/seed/1/600/400', description: "d1", category:"c1" },
-  { id: 32, title: 'Headset X', price: 89.9, image: 'https://picsum.photos/seed/2/600/400',  description: "d2", category:"c2" },
-
-  // ...
-];
+import { Product } from '../../models/Product';
 
 
 function App() {
@@ -57,8 +19,15 @@ function App() {
     setCart(newCart);
   }
 
+
+  const fetchProducts = async () => {
+    const response = await fetch("https://fakestoreapi.com/products");
+    const products = (!response.ok ? [] : await response.json() as Product[]);
+    setProducts(products);
+  }
+
   useEffect(() => {
-    setProducts(fakeProducts);
+    fetchProducts();
   },[]);
 
   const onPayFinished = () => {
