@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import type { Product } from "../../models/Product"
 import CartGallery from "./CartGalery"
 import { useState } from "react";
