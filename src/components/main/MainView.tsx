@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../../models/Product";
 import ProductDetails from "./products/ProductDetail";
 import ProductGallery from "./products/ProductGalery"
@@ -42,7 +42,19 @@ const products: Product[] = [
 
 
 function MainView() {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [categories,setCategories] = useState<string[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string |null>(null);
+    const [productsSelected, setProductsSelected] = useState<Product[]>([]);
+
+    useEffect(() => {
+      const categoriesList = products.map(p => p.category);
+      const categoriesSet = new Set(categoriesList);
+      setCategories(Array.from(categoriesSet));
+      setSelectedCategory(null);
+      setProductsSelected(products);
+    },[]);
+
     return (
       <main className="p-6 space-y-6">
         <header className="bg-blue-100 p-4 rounded shadow flex flex-col items-center">
@@ -50,21 +62,37 @@ function MainView() {
         </header>
 
         <div className="flex w-full h-screen">
-          <div className="flex-grow bg-blue-100 p-4 overflow-y-auto">
-            <section className="bg-white p-4 rounded shadow flex flex-col items-center">
-              <ProductGallery products={products} onSelect={(p :Product) => {setSelectedProduct(p)}}></ProductGallery>
+            <section className="flex-grow bg-blue-100 p-4 overflow-y-auto bg-white p-4 rounded shadow flex flex-col items-center">
+              <select  className="border rounded px-3 py-2"
+                value={selectedCategory ?? ""}
+                onChange={(e) =>{
+                    setSelectedCategory(e.target.value === "" ? null : e.target.value);
+                    const productsSelection = products.filter(p => p.category===e.target.value || e.target.value==="");
+                    setProductsSelected(productsSelection);
+                    if (!productsSelection.some(e => e.id === selectedProduct?.id)) {
+                      setSelectedProduct(null);
+                    }
+                  }
+                }
+              >
+                <option value="">All</option>
+                {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+                ))}
+              </select>
+              <ProductGallery products={productsSelected} onSelect={(p :Product) => {setSelectedProduct(p)}}></ProductGallery>
             </section>
-          </div>
-
-          <div className="flex-shrink-0 bg-gray-200 p-4">
-            <section className="bg-white p-4 rounded shadow flex flex-col items-center">
-              <h2 className="text-2xl font-semibold mb-2">Details</h2>
-              <ProductDetails product={selectedProduct}></ProductDetails>
-            </section>
-          </div>
+         
+              {selectedProduct!==null ? 
+              <section className="flex-shrink-0 bg-gray-200 p-4 bg-white p-4 rounded shadow flex flex-col items-center">
+                <ProductDetails product={selectedProduct}></ProductDetails>
+              </section> : <></>}
+            
         </div>
       </main>
     )
   }
   
-  export default MainView
+  export default MainView;

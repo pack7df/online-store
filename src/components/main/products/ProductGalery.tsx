@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../../../models/Product";
 
 type ProductGalleryProps = {
@@ -13,6 +13,12 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ products, onSelect })  
       setSelectedId(p.id);
       if (onSelect) onSelect(p);
     }
+
+    useEffect(() => {
+      if (!products.some(e => e.id === selectedId)) {
+        setSelectedId(null);
+      }
+    }, [products]);
 
     return (
         <div className="w-full aspect-[16/9] overflow-y-auto p-4 bg-gray-50">

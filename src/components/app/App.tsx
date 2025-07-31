@@ -7,7 +7,7 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 
 function App() {
 
-  const [isMainViewMode,setIsMainViewMode] = useState(false);
+  const [isMainViewMode,setIsMainViewMode] = useState(true);
 
   
 
