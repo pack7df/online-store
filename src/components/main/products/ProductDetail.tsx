@@ -11,7 +11,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, quantity, onQu
       return (
         <section className="max-w-xl mx-auto p-6 bg-white rounded shadow">
           <h2 className="text-3xl font-bold mb-4 text-center">{product.title}</h2>
-          <p className="italic text-gray-500">Categoría: {product.category}</p>
+          <p className="italic text-gray-500">Category: {product.category}</p>
           <img
             src={product.image}
             alt={product.title}
