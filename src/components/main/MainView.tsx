@@ -29,10 +29,6 @@ const MainView: React.FC<MainViewProps> = ({ products, cart, setCartQuantity }) 
     const selectedCartQuantity = selectedCartQuantityQuery??0;
     return (
       <main className="p-6 space-y-6">
-        <header className="bg-blue-100 p-4 rounded shadow flex flex-col items-center">
-          <h1 className="text-3xl font-bold text-blue-800">Header</h1>
-        </header>
-
         <div className="flex w-full h-screen">
             <section className="flex-grow bg-blue-100 p-4 overflow-y-auto bg-white p-4 rounded shadow flex flex-col items-center">
               <select  className="border rounded px-3 py-2"

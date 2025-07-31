@@ -35,6 +35,10 @@ function App() {
     setCart(new Map());
   };
 
+  const itemsCount = Array.from(cart.values());
+
+  const hasCartItems = (itemsCount.length>0) && (itemsCount.some(v => v>0));
+
   return (
     <div className="main"> 
       <nav  className="nav">
@@ -42,10 +46,10 @@ function App() {
         ${isMainViewMode ? 'btn-active' : 'btn-inactive'}`} onClick={() => setIsMainViewMode(true)}>
               Products
         </button>
-        <button className={`btn btn-flex 
-        ${!isMainViewMode ? 'btn-active' : 'btn-inactive'}`} 
-        onClick={() => setIsMainViewMode(false)}>
-          <ShoppingCartIcon className="shopingCart" />
+        <button disabled={!hasCartItems} className={`btn btn-flex 
+          ${!isMainViewMode ? 'btn-active' : 'btn-inactive'}`} 
+          onClick={() => setIsMainViewMode(false)}>
+            <ShoppingCartIcon className="shopingCart" />
         </button>
       </nav>
       {isMainViewMode ? <MainView cart={cart} products={products} setCartQuantity={ setCartQuantity}></MainView> : <CartView cart={cart} onQuantityChange={setCartQuantity} products={products} onPayFinished={onPayFinished}></CartView>}
