@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import type { Product } from "../../models/Product"
 import CartGallery from "./CartGalery"
 import { useState } from "react";
-import { LoadingOverlay } from "../LoadingOverlay";
+import { SpinOverlay } from "../SpinOverlay";
 
 
 type CartViewProps = {
@@ -22,7 +22,7 @@ const CartView: React.FC<CartViewProps> = ({ products, cart, onQuantityChange, o
   console.log(totalToPay)
   return (
     <main className="p-6 space-y-6">
-      {isPaying ? <LoadingOverlay></LoadingOverlay>: <></>}
+      {isPaying ? <SpinOverlay></SpinOverlay>: <></>}
       {totalToPay>0 ? <>
         <header className="bg-blue-100 p-4 rounded shadow flex flex-col items-center">
           <p className="text-xl text-green-600 font-semibold mb-2">

@@ -1,8 +1,8 @@
-export const LoadingOverlay = () => {
+export const SpinOverlay = ({ message = "Wait a moment to finish transaction please..." }: { message?: string }) => {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center z-50 text-white">
         <svg
-          className="animate-spin h-16 w-16 text-white"
+          className="animate-spin h-16 w-16 mb-4"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -21,6 +21,7 @@ export const LoadingOverlay = () => {
             d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
           ></path>
         </svg>
+        <p className="text-lg">{message}</p>
       </div>
     );
   };
