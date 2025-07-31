@@ -1,3 +1,8 @@
+To run the project:
+1. npm install 
+2. npm run dev
+it should run on http://localhost:5175/
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
