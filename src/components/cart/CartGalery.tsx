@@ -9,7 +9,7 @@ type ChartGalleryProps = {
     onQuantityChange : (product: Product, value:number) => void;
   };
 
-const ChartGallery: React.FC<ChartGalleryProps> = ({ products, cart, onQuantityChange })  => {
+const CartGallery: React.FC<ChartGalleryProps> = ({ products, cart, onQuantityChange })  => {
     const cartProducts = products.filter(p => {
         const quantity = cart.get(p.id);
         return (quantity) && (quantity>0);
@@ -39,4 +39,4 @@ const ChartGallery: React.FC<ChartGalleryProps> = ({ products, cart, onQuantityC
 }
 
  
-export default ChartGallery
+export default CartGallery

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import type { Product } from "../../models/Product"
-import ChartGallery from "./ChartGalery"
+import CartGallery from "./CartGalery"
 import { useState } from "react";
 import { LoadingOverlay } from "../LoadingOverlay";
 
@@ -46,7 +46,7 @@ const CartView: React.FC<CartViewProps> = ({ products, cart, onQuantityChange, o
           </button>
         </header>
         <section className="bg-white p-4 rounded shadow flex flex-col items-center">
-          <ChartGallery products={products} cart={cart} onQuantityChange={onQuantityChange}></ChartGallery>
+          <CartGallery products={products} cart={cart} onQuantityChange={onQuantityChange}></CartGallery>
         </section>
       </> : <></>}
       
