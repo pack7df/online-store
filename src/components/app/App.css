@@ -1,0 +1,27 @@
+.main {
+  @apply min-h-screen bg-gray-100
+}
+
+.nav {
+  @apply bg-white shadow p-4 flex justify-evenly items-center
+}
+
+.btn {
+  @apply px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-active {
+  @apply bg-blue-600 text-white;
+}
+
+.btn-inactive {
+  @apply bg-gray-200 text-gray-800;
+}
+
+.btn-flex {
+  @apply flex items-center gap-2;
+}
+
+.shopingCart {
+  @apply h-5 w-5
+}

@@ -12,16 +12,16 @@ function App() {
   
 
   return (
-    <div className="min-h-screen bg-gray-100"> 
-      <nav  className="bg-white shadow p-4 flex justify-evenly items-center">
-        <button className={`px-4 py-2 rounded ${
-          isMainViewMode ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'
-          }`} onClick={() => setIsMainViewMode(true)}>
+    <div className="main"> 
+      <nav  className="nav">
+        <button className={`btn 
+        ${isMainViewMode ? 'btn-active' : 'btn-inactive'}`} onClick={() => setIsMainViewMode(true)}>
               Products
         </button>
-        <button className={`px-4 py-2 rounded ${!isMainViewMode ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`} 
+        <button className={`btn btn-flex 
+        ${!isMainViewMode ? 'btn-active' : 'btn-inactive'}`} 
         onClick={() => setIsMainViewMode(false)}>
-          <ShoppingCartIcon className="h-5 w-5" />
+          <ShoppingCartIcon className="shopingCart" />
         </button>
       </nav>
       {isMainViewMode ? <MainView></MainView> : <CartView></CartView>}
