@@ -4,7 +4,7 @@ import type { Product } from "../../../models/Product";
 type ProductDetailsProps = {
     product: Product ;
     quantity : number
-    onQuantityChange : (value:number) => void;
+    onQuantityChange : (product: Product, value:number) => void;
   };
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product, quantity, onQuantityChange })  => {
@@ -26,7 +26,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, quantity, onQu
                 <button
                     className="px-2 py-1 bg-red-500 text-white rounded disabled:opacity-50"
                     onClick={() => {
-                        onQuantityChange(quantity-1);
+                        onQuantityChange(product, quantity-1);
                     }}
                     disabled={quantity <= 0}
                     >
@@ -36,7 +36,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, quantity, onQu
                 <button
                     onClick={() => 
                         {
-                        onQuantityChange(quantity+1);
+                        onQuantityChange(product, quantity+1);
                         }
                     }
                     className="px-2 py-1 bg-green-500 text-white rounded"
