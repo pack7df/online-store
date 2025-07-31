@@ -46,6 +46,7 @@ function MainView() {
     const [categories,setCategories] = useState<string[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string |null>(null);
     const [productsSelected, setProductsSelected] = useState<Product[]>([]);
+    const [cart, setCart] = useState<Map<number,number>>(new Map());
 
     useEffect(() => {
       const categoriesList = products.map(p => p.category);
@@ -55,6 +56,15 @@ function MainView() {
       setProductsSelected(products);
     },[]);
 
+    const setCartQuantity = (q: number) => {
+      if (selectedProduct===null) return;
+      const newCart = new Map<number,number>(cart);
+      newCart.set(selectedProduct.id,q);
+      setCart(newCart);
+    }
+
+    const selectedCartQuantityQuery = (selectedProduct!==null)?cart.get(selectedProduct.id) : 0;
+    const selectedCartQuantity = selectedCartQuantityQuery??0;
     return (
       <main className="p-6 space-y-6">
         <header className="bg-blue-100 p-4 rounded shadow flex flex-col items-center">
@@ -82,12 +92,12 @@ function MainView() {
                 </option>
                 ))}
               </select>
-              <ProductGallery products={productsSelected} onSelect={(p :Product) => {setSelectedProduct(p)}}></ProductGallery>
+              <ProductGallery cart={cart} products={productsSelected} onSelect={(p :Product) => {setSelectedProduct(p)}}></ProductGallery>
             </section>
          
               {selectedProduct!==null ? 
               <section className="flex-shrink-0 bg-gray-200 p-4 bg-white p-4 rounded shadow flex flex-col items-center">
-                <ProductDetails product={selectedProduct}></ProductDetails>
+                <ProductDetails quantity={selectedCartQuantity} product={selectedProduct} onQuantityChange={setCartQuantity}></ProductDetails>
               </section> : <></>}
             
         </div>

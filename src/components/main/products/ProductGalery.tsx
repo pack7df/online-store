@@ -3,10 +3,11 @@ import { Product } from "../../../models/Product";
 
 type ProductGalleryProps = {
     products: Product[];
+    cart: Map<number, number>;
     onSelect: (p: Product) => void;
   };
 
-const ProductGallery: React.FC<ProductGalleryProps> = ({ products, onSelect })  => {
+const ProductGallery: React.FC<ProductGalleryProps> = ({ products, cart, onSelect })  => {
     const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const onClick = (p : Product) => {
@@ -25,6 +26,8 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ products, onSelect })  
           <div className="flex flex-wrap justify-start gap-4">
             {products.map((product) =>  {
               const isSelected = product.id === selectedId;
+              var quantity = cart.get(product.id);
+              if (!quantity) quantity = 0;
               return (
                 <div
                   key={product.id}
@@ -32,14 +35,18 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ products, onSelect })  
                   className={`
                   flex flex-col items-center border rounded-lg p-4 shadow cursor-pointer w-40
                   ${isSelected ? 'border-blue-600 ring-2 ring-blue-400' : 'border-gray-300'}
-              `}
+                   `}
                 >
                   <p className="text-sm font-semibold mb-2">{product.title}</p>
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-28 object-cover rounded"
-                  />
+                  <div className="relative">
+                    <img src={product.image} alt={product.title} className="w-full h-auto" />
+
+                    {quantity > 0 && (
+                        <div className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full px-2 py-1 m-1">
+                          {quantity}
+                        </div>
+                    )}
+                  </div>
                   <p className="text-blue-600 font-bold mt-2">${product.price}</p>
                 </div>
               );
